@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import Extension from './Extension';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    useEffect(() => {
+        /* eslint-disable no-undef */
+        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+            const activeTabId = tabs[0].id;
+            chrome.scripting.executeScript({
+                target: { tabId: activeTabId },
+                function: () => alert("React Chrome Extension Alert")
+            });
+        });
+    }, []); // Empty dependency array to run it once when the component mounts
+
+    return (
+        <div>
+            {/* Other components of your React app */}
+            <Extension />
+        </div>
+    );
 }
 
 export default App;
+
+
