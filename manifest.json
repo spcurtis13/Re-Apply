@@ -1,0 +1,12 @@
+{
+    "name": "Re-Apply",
+    "version": "0.1.0",
+    "description": "An easier way to apply for jobs",
+    "permissions": ["storage", "tabs"],
+    "content_scripts:": [
+        {
+            "js": ["basicInfo.js"]
+        }
+    ],
+    "action" : {"default_popup": "popup.html"}
+}
